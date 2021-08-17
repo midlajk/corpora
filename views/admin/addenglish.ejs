@@ -1,0 +1,71 @@
+<%- include('../admininclude/head.ejs') %>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Add English Words
+                </h6>
+
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <div class="">
+                                <div>
+                                    <h1 class="h4 text-gray-900 mb-4">Add new words</h1>
+                                    <% if (errorMessage) { %>
+                                        <p class=" mb-4 " style="color: crimson; ">
+                                            <%= errorMessage %>
+                                        </p>
+                                        <% } %>
+                                </div>
+                                <form action="<% if (editing=='editmain'){%>/controller/editenglish<%}else{%>/controller/addenglishword<%}%>" method="POST" id="addenglish">
+                                    <label for="">Word</label>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12  input-group">
+
+                                            <input tabindex="4" required type="text" name="word" class="form-control form-control-user" id="exampleFirstName" value="<%=doc.word%>" placeholder="Enter word">
+                                        </div>
+
+                                    </div><label for="">Type</label>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12  input-group">
+
+                                            <input tabindex="4" required type="text" name="type" class="form-control form-control-user" id="exampleFirstName" value="<%=doc.method%>" placeholder="word type">
+                                        </div>
+
+                                    </div><label for="">Definition / Meaning</label>
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-12 input-group">
+                                            <textarea tabindex="5" name="meaning" required class="form-control form-control-user" id="exampleInputEmail" rows="8"><%=doc.meaning%> </textarea>
+                                        </div>
+
+
+                                    </div>
+                                    <% if (editing=='main'){%>
+                                        <input type="hidden" name="method" value="add">
+                                        <%}else if (editing=='editmain'){%> <input type="hidden" name="method" value="mainedit">
+                                            <input type="hidden" name="id" value="<%=doc._id%>">
+                                            <%}else{%> <input type="hidden" name="method" value="reqedit">
+                                                <%}%>
+                                                    <button type="submit" form="addenglish" class="btn btn-info btn-user btn-block col-sm-12 mb-3 mb-sm-0 ">
+        Add or edit
+      </button></form>
+                                <hr>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include('../admininclude/end.ejs') %>

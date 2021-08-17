@@ -1,0 +1,120 @@
+<%- include('../clientincludes/head.ejs') %>
+    <div class="container-fluid" style="padding: 10%;">
+
+        <!-- Page Heading -->
+
+
+
+        <div class="card o-hidden border-0 shadow-lg p-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="text-center">
+                            <h1 class=" text-gray-900 mb-4 text mb-5" style="font-family: 'Dancing Script', cursive; ">Corpora</h1>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div>
+
+
+                            <%- include('../clientincludes/search.ejs') %>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="container">
+                        <button class="btn btn-sm float-right">Add +</button>
+                        <div class="col-lg-12">
+                            <ol style="padding-left: 0ch;">
+
+                                <%if(result){%>
+                                    <li class="h6">
+
+                                        <h6 class="mb-3">
+                                            <%=result.word%>
+                                        </h6>
+
+                                        <h6 style="color: grey;">
+                                            <%=result.method%>
+                                        </h6>
+                                        <hr>
+                                        <ul style="list-style-type:circle">
+                                            <li>
+                                                <p>
+                                                    <%=result.meaning%>
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <%}else{%>
+                                        <li class="h6">
+
+                                            <h6 class="mb-3">
+                                                <%=word%>
+                                            </h6>
+
+                                            <h6 style="color: grey;">
+
+                                            </h6>
+                                            <hr>
+                                            <ul style="list-style-type:circle">
+                                                <li>
+                                                    <p>
+                                                        No meaning found yet
+                                                    </p>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <%}%>
+                                            <%for(let docs of data){%>
+
+                                                <li class="h6">
+
+                                                    <h6 class="mb-3">
+                                                        <%=docs.word%>
+                                                    </h6>
+
+                                                    <h6 style="color: grey;">
+                                                        <%=docs.method%>
+                                                    </h6>
+                                                    <hr>
+                                                    <ul style="list-style-type:circle">
+                                                        <li>
+                                                            <p>
+                                                                <%=docs.meaning%>
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <%}%>
+                            </ol>
+
+                        </div>
+                    </div>
+                </div>
+                <hr class="mb-5">
+                <%- include('../clientincludes/menu.ejs') %>
+
+
+
+
+            </div>
+
+
+            <!-- End of Topbar -->
+
+            <!-- Begin Page Content -->
+
+            <!-- /.container-fluid -->
+
+        </div>
+    </div>
+    <%- include('../clientincludes/end.ejs') %>

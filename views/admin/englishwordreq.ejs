@@ -1,0 +1,82 @@
+<%- include('../admininclude/head.ejs') %>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">List of English Word Request
+                </h6>
+                <a class="btn btn-primary float-right">Add new
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Word</th>
+                                <th>type</th>
+                                <th>Meaning</th>
+                                <th>Edit</th>
+
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Word</th>
+                                <th>type</th>
+                                <th>Meaning</th>
+                                <th>Edit</th>
+
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <form id="aduser" action="/adduser" method="POST">
+                                <tr>
+
+                                    <td><input required class="p-1 form-control" style="width: 200px;" tabIndex="1" type="text" placeholder="User name" name="name" id=""></td>
+
+                                    <td>
+                                        <select required name="previlage" tabindex="2" class="form-control" style="width: 155px;">
+                            <option  value="fullprevilage">fullprevilage</option>
+                            <option value="halfprevilage">halfprevilage</option>
+                            <option value="minimumprevilage">minimumprevilage</option>
+                        </select>
+                                    </td>
+                                    <td><input required class="form-control" tabIndex="3" type="text" name="password" style="width: 150px;" placeholder="Password"></td>
+                                    <td><input required class="p-1 form-control" tabIndex="4" type="text" placeholder="Role" style="width: 125px;" name="role" id="price-2"></td>
+
+                                    <td>
+                                        <button form="aduser" tabIndex="5" class="btn btn-primary" type="submit">Submit</button></td>
+                                </tr>
+                            </form>
+                            <%for(let doc of docs){%>
+                                <tr>
+                                    <td>
+
+                                        <%=doc.name%>
+
+                                    </td>
+                                    <td>
+                                        <%=doc.type%>
+                                    </td>
+
+                                    <td>
+                                        <%=doc.meaning%>
+                                    </td>
+                                    <td><a href="/controller/edit/<%=doc._id%>" class="btn btn-primary">edit</a></td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include('../admininclude/end.ejs') %>

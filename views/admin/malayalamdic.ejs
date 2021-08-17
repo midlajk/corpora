@@ -1,0 +1,65 @@
+<%- include('../admininclude/head.ejs') %>
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">List of MALAYALAM Words
+                </h6>
+                <a href="/controller/addmalayalam" class="btn btn-success text-white float-right">Add new
+                </a>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Word</th>
+                                <th>type</th>
+                                <th>Meaning</th>
+                                <th>Edit</th>
+
+
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Word</th>
+                                <th>type</th>
+                                <th>Meaning</th>
+                                <th>Edit</th>
+
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+
+                            <%for(let doc of docs){%>
+                                <tr>
+                                    <td>
+
+                                        <%=doc.word%>
+
+                                    </td>
+                                    <td>
+                                        <%=doc.method%>
+                                    </td>
+
+                                    <td>
+                                        <%=doc.meaning%>
+                                    </td>
+                                    <td><a href="/controller/editmalayalam/<%=doc._id%>" class="btn btn-primary">Edit</a> <a onclick="return confirm('are you sure')" href="/controller/deletemalayalam/<%=doc._id%>" class="btn btn-danger">Delete</a></td>
+
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <%- include('../admininclude/end.ejs') %>
