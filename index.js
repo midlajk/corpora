@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 
- const url = "mongodb+srv://midlaj:zain9747@cluster0.nuuwi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+ const url = "mongodb+srv://admin:admin123@cluster0.6fhhm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 
 const store = new MongoDBStore({

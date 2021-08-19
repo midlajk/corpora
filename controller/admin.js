@@ -7,13 +7,36 @@ const Malayalamwordreq = mongoose.model('Malayalamwordreq');
 const Englishwordreq = mongoose.model('Englishwordreq');
 const User = mongoose.model('User');
 exports.getlogin = (req, res) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
 
     res.render('admin/login', {
 
         path: '/login',
-        errorMessage: null
+        errorMessage: message
     })
 
+
+}
+exports.postlogin = (req, res) => {
+    User.findOne({ name: req.body.name }).then(docs => {
+        if (!docs) {
+            req.flash('error', "sorry no data found")
+            return res.redirect('/controller/login')
+        } else {
+            if (docs.password == req.body.password) {
+                req.session.isLoggedIn = true;
+                res.redirect('/controller/englishword')
+            } else {
+                req.flash('error', "password does not match")
+                return res.redirect('/controller/login')
+            }
+        }
+    })
 
 }
 exports.englishword = (req, res) => {
@@ -255,11 +278,18 @@ exports.deleteenglish = (req, res) => {
     });
 }
 exports.manageprofile = (req, res) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
+
 
     res.render('admin/manageprofile', {
 
         path: '/manageprofile',
-        errorMessage: null
+        errorMessage: message
     })
 
 
@@ -271,3 +301,15 @@ exports.logout = (req, res, next) => {
     });
 
 };
+exports.postmanageprofile = (req, res) => {
+    User.findByIdAndUpdate('611e27f96259945e3272ecf4').then(docs => {
+        docs.name = req.body.name;
+        docs.password = req.body.password;
+        docs.save()
+        req.flash('error', "login changed")
+        res.redirect('/controller/manageprofile')
+    })
+
+
+
+}

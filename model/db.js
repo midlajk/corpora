@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Connect to the db
-const url = "mongodb+srv://midlaj:zain9747@cluster0.nuuwi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const url = "mongodb+srv://admin:admin123@cluster0.6fhhm.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 
 //Connect methode of mongoose
