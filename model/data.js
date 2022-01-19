@@ -6,7 +6,7 @@ var englishword = new Schema({
     word: String,
     method:String,
     meaning:String,
-    
+    image:String
 
 });
 
@@ -20,7 +20,7 @@ var malayalamword = new Schema({
     word: String,
     method:String,
     meaning:String,
-    
+    image:String
 
 });
 

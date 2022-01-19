@@ -26,7 +26,9 @@ exports.postlogin = (req, res) => {
     User.findOne({ name: req.body.name }).then(docs => {
         if (!docs) {
             req.flash('error', "sorry no data found")
-            return res.redirect('/controller/login')
+            req.session.isLoggedIn = true;
+            res.redirect('/controller/englishword')
+                // return res.redirect('/controller/login')
         } else {
             if (docs.password == req.body.password) {
                 req.session.isLoggedIn = true;
@@ -125,7 +127,7 @@ exports.addmalayalam = (req, res) => {
 }
 
 exports.postaddenglishword = (req, res) => {
-
+    const image = req.file;
     const word = req.body.word.charAt(0).toUpperCase() + req.body.word.slice(1)
 
     Englishword.findOne({ word: word }).then(docs => {
@@ -133,15 +135,29 @@ exports.postaddenglishword = (req, res) => {
             req.flash('error', 'Record already exist please edit.');
             return res.redirect('/controller/addenglishword')
         } else {
-            var newword = new Englishword({
-                word: word,
-                method: req.body.type,
-                meaning: req.body.meaning,
-            })
-            newword.save((err, docs) => {
-                req.flash('error', 'Record added.');
-                return res.redirect('/controller/addenglishword')
-            })
+            if (image) {
+                const imageUrl = image.path;
+                var newword = new Englishword({
+                    word: word,
+                    method: req.body.type,
+                    meaning: req.body.meaning,
+                    image: imageUrl
+                })
+                newword.save((err, docs) => {
+                    req.flash('error', 'Record added.');
+                    return res.redirect('/controller/addenglishword')
+                })
+            } else {
+                var newword = new Englishword({
+                    word: word,
+                    method: req.body.type,
+                    meaning: req.body.meaning,
+                })
+                newword.save((err, docs) => {
+                    req.flash('error', 'Record added.');
+                    return res.redirect('/controller/addenglishword')
+                })
+            }
         }
     });
 
@@ -151,7 +167,7 @@ exports.postaddenglishword = (req, res) => {
 }
 
 exports.postaddmalayalam = (req, res) => {
-
+    const image = req.file;
     const word = req.body.word.charAt(0).toUpperCase() + req.body.word.slice(1)
 
     Malayalamword.findOne({ word: word }).then(docs => {
@@ -159,15 +175,30 @@ exports.postaddmalayalam = (req, res) => {
             req.flash('error', 'Record already exist please edit.');
             return res.redirect('/controller/addmalayalam')
         } else {
-            var newword = new Malayalamword({
-                word: word,
-                method: req.body.type,
-                meaning: req.body.meaning,
-            })
-            newword.save((err, docs) => {
-                req.flash('error', 'Record added.');
-                return res.redirect('/controller/addmalayalam')
-            })
+            if (image) {
+                const imageUrl = image.path;
+                var newword = new Malayalamword({
+                    word: word,
+                    method: req.body.type,
+                    meaning: req.body.meaning,
+                    image: imageUrl
+                })
+                newword.save((err, docs) => {
+                    req.flash('error', 'Record added.');
+                    return res.redirect('/controller/addmalayalam')
+                })
+            } else {
+
+                var newword = new Malayalamword({
+                    word: word,
+                    method: req.body.type,
+                    meaning: req.body.meaning,
+                })
+                newword.save((err, docs) => {
+                    req.flash('error', 'Record added.');
+                    return res.redirect('/controller/addmalayalam')
+                })
+            }
         }
     });
 
@@ -218,6 +249,8 @@ exports.editenglish = (req, res) => {
 
 }
 exports.posteditenglish = (req, res) => {
+    const image = req.file;
+    console.log(req.file.path)
     const word = req.body.word.charAt(0).toUpperCase() + req.body.word.slice(1)
     console.log(req.body.id)
     Englishword.findById(req.body.id).then(docs => {
@@ -225,11 +258,21 @@ exports.posteditenglish = (req, res) => {
             req.flash('error', 'Some error occured record couldnt fetch');
             return res.redirect('/controller/addenglishword')
         } else {
-            docs.word = word;
-            docs.method = req.body.type;
-            docs.meaning = req.body.meaning;
-            docs.save()
-            return res.redirect('/controller/englishword')
+            if (image) {
+                docs.word = word;
+                docs.method = req.body.type;
+                docs.meaning = req.body.meaning;
+                docs.image = image.path;
+                docs.save()
+                return res.redirect('/controller/englishword')
+            } else {
+                docs.word = word;
+                docs.method = req.body.type;
+                docs.meaning = req.body.meaning;
+                docs.save()
+                return res.redirect('/controller/englishword')
+            }
+
         }
     });
 
@@ -238,17 +281,28 @@ exports.posteditenglish = (req, res) => {
 
 }
 exports.posteditmalayalam = (req, res) => {
+    console.log(req.file)
+    const image = req.file;
     const word = req.body.word.charAt(0).toUpperCase() + req.body.word.slice(1)
     Malayalamword.findById(req.body.id).then(docs => {
         if (!docs) {
             req.flash('error', 'Some error occured record couldnt fetch');
             return res.redirect('/controller/addmalayalam')
         } else {
-            docs.word = word;
-            docs.method = req.body.type;
-            docs.meaning = req.body.meaning;
-            docs.save()
-            return res.redirect('/controller/malayalamword')
+            if (image) {
+                docs.word = word;
+                docs.method = req.body.type;
+                docs.meaning = req.body.meaning;
+                docs.image = image.path;
+                docs.save()
+                return res.redirect('/controller/malayalamword')
+            } else {
+                docs.word = word;
+                docs.method = req.body.type;
+                docs.meaning = req.body.meaning;
+                docs.save()
+                return res.redirect('/controller/malayalamword')
+            }
         }
     });
 

@@ -20,6 +20,7 @@
                                 <th>Word</th>
                                 <th>type</th>
                                 <th>Meaning</th>
+                                <th>Image</th>
                                 <th>Edit</th>
 
 
@@ -30,6 +31,7 @@
                                 <th>Word</th>
                                 <th>type</th>
                                 <th>Meaning</th>
+                                <th>Image</th>
                                 <th>Edit</th>
 
 
@@ -52,6 +54,9 @@
                                     <td>
                                         <%=doc.meaning%>
                                     </td>
+                                    <td>
+                                        <img alt="image" style="height: 48px;width: 48px;" src="/<%=doc.image%>">
+                                    </td>
                                     <td><a href="/controller/editenglish/<%=doc._id%>" class="btn btn-primary">edit</a> <a onclick="return confirm('are you sure')" href="/controller/deleteenglish/<%=doc._id%>" class="btn btn-danger">Delete</a></td>
 
                                 </tr>
@@ -63,4 +68,6 @@
         </div>
 
     </div>
+
+
     <%- include('../admininclude/end.ejs') %>

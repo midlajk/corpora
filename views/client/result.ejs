@@ -39,6 +39,9 @@
 
                                         <h6 class="mb-3">
                                             <%=result.word%>
+                                                <a href="#" data-toggle="modal" data-target="#imagemodal"><img style="height: 48px;width: 48px;" src="/<%=result.image%>"></a>
+
+
                                         </h6>
 
                                         <h6 style="color: grey;">
@@ -48,7 +51,7 @@
                                         <ul style="list-style-type:circle">
                                             <li>
                                                 <p>
-                                                    <%=result.meaning%>
+                                                    <%-result.meaning%>
                                                 </p>
                                             </li>
                                         </ul>
@@ -75,26 +78,27 @@
 
                                         <%}%>
                                             <%for(let docs of data){%>
+                                                <%if(docs.word == result.word){}else{%>
+                                                    <li class="h6">
 
-                                                <li class="h6">
+                                                        <h6 class="mb-3">
+                                                            <%=docs.word%>
+                                                        </h6>
 
-                                                    <h6 class="mb-3">
-                                                        <%=docs.word%>
-                                                    </h6>
-
-                                                    <h6 style="color: grey;">
-                                                        <%=docs.method%>
-                                                    </h6>
-                                                    <hr>
-                                                    <ul style="list-style-type:circle">
-                                                        <li>
-                                                            <p>
-                                                                <%=docs.meaning%>
-                                                            </p>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <%}%>
+                                                        <h6 style="color: grey;">
+                                                            <%=docs.method%>
+                                                        </h6>
+                                                        <hr>
+                                                        <ul style="list-style-type:circle">
+                                                            <li>
+                                                                <p>
+                                                                    <%-docs.meaning%>
+                                                                </p>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <%}%>
+                                                        <%}%>
                             </ol>
 
                         </div>
@@ -114,6 +118,27 @@
             <!-- Begin Page Content -->
 
             <!-- /.container-fluid -->
+
+        </div>
+    </div>
+    <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Image</h5>
+                    <a class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <img src="<%if(result){%>/<%=result.image%><%}%>" alt="Image" style="width: 100%;" alt="">
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+
+                </div>
+            </div>
 
         </div>
     </div>
