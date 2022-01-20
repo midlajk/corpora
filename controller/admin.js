@@ -250,9 +250,7 @@ exports.editenglish = (req, res) => {
 }
 exports.posteditenglish = (req, res) => {
     const image = req.file;
-    console.log(req.file.path)
     const word = req.body.word.charAt(0).toUpperCase() + req.body.word.slice(1)
-    console.log(req.body.id)
     Englishword.findById(req.body.id).then(docs => {
         if (!docs) {
             req.flash('error', 'Some error occured record couldnt fetch');
@@ -281,7 +279,6 @@ exports.posteditenglish = (req, res) => {
 
 }
 exports.posteditmalayalam = (req, res) => {
-    console.log(req.file)
     const image = req.file;
     const word = req.body.word.charAt(0).toUpperCase() + req.body.word.slice(1)
     Malayalamword.findById(req.body.id).then(docs => {
