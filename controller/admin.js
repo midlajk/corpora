@@ -26,9 +26,7 @@ exports.postlogin = (req, res) => {
     User.findOne({ name: req.body.name }).then(docs => {
         if (!docs) {
             req.flash('error', "sorry no data found")
-            req.session.isLoggedIn = true;
-            res.redirect('/controller/englishword')
-                // return res.redirect('/controller/login')
+            return res.redirect('/controller/login')
         } else {
             if (docs.password == req.body.password) {
                 req.session.isLoggedIn = true;
