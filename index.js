@@ -1,4 +1,8 @@
 require('./model/db');
+"use strict";
+var util= require('util');
+const utf8Encoder = new util.TextEncoder();
+const utf8Decoder = new util.TextDecoder("utf-8", { ignoreBOM: true });
 const path = require('path');
 const session = require('express-session');
 const express = require('express');
